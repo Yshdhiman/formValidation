@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/1e3c9b134c.js" crossorigin="anonymous"></script>
+    <title>Form Validation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/laptopAbove.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        h1 {
+            color: white;
+            font-variant: small-caps;
+            font-size: 60px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #container {
+            margin: 30px 150px 300px 150px;
+        }
+
+        #form {
+            display: grid;
+            grid-template-columns: auto auto;
+            gap: 20px 30px;
+        }
+
+        .row {
+            margin: 0 10px;
+        }
+
+        .input {
+            width: 60%;
+            float: left;
+        }
+
+        .label {
+            width: 40%;
+            float: left;
+            font-size: 20px;
+        }
+
+        label {
+            color: white;
+        }
+
+        input[type=text],
+        input[type=password] {
+            display: inline-block;
+            min-width: 265px;
+            height: 35px;
+            font-size: 18px;
+            outline: none;
+            border: 2.5px solid #ccc9c9;
+            border-radius: 10px;
+            transition: 0.5s;
+            letter-spacing: 0.5px;
+            background-color: rgba(46, 44, 44, 0.781);
+            color: rgba(233, 227, 227, 0.911);
+            padding: 10px 10px;
+        }
+
+        select {
+            display: inline-block;
+            width: 260px;
+            height: 35px;
+            font-size: 18px;
+            font-size: 18px;
+            outline: none;
+            border: 2.5px solid #ccc9c9;
+            border-radius: 10px;
+            transition: 0.5s;
+            letter-spacing: 0.5px;
+            background-color: rgba(46, 44, 44, 0.781);
+            color: rgba(233, 227, 227, 0.911);
+            padding: 0px 10px;
+        }
+
+        input[type=text]:focus,
+        input[type=password]:focus {
+            border: 2.5px solid #979696;
+            background-color: rgba(104, 100, 100, 0.61);
+        }
+
+        input[type=submit] {
+            width: 160px;
+            font-size: 20px;
+            padding: 20px 10px;
+            border-radius: 50px;
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        .submit {
+            position: relative;
+            right: 23%;
+            top:80%;
+        }
+
+        span {
+            display: block;
+            color: #FF0000;
+            font-size: 17px;
+            font-weight: light;
+            text-shadow: 0.1px 0.1px #3f3939;
+        }
+
+        /* .conpass {
+            visibility: hidden;
+        } */
+        .eye {
+            position: relative;
+            top: -25px;
+            left: 17vw;
+            width: 10px;
+            color: rgb(197, 193, 193);
+        }
+
+        /* responsive */
+        @media only screen and (max-width: 350px) {
+            body #container .eye {
+                position: relative;
+                left: 58vw;
+            }
+        }
+
+        @media only screen and (max-width: 610px) {
+            body #container h1 {
+                font-size: 35px;
+            }
+
+            #container label {
+                font-size: 18px;
+            }
+
+            .row input[type="text"],
+            .row input[type="password"],
+            select {
+                font-size: 15px;
+            }
+
+            body #container {
+                margin: 60px 35px 300px;
+            }
+
+            input[type="submit"] {
+                font-size: 18px;
+                padding: 15px 0;
+                width: 140px;
+            }
+
+            body .gender {
+                width: 10px;
+            }
+
+        }
+
+        @media only screen and (max-width: 800px) {
+            #container h1 {
+                font-size: 40px;
+            }
+
+            #container {
+                margin: 60px 60px 300px 60px;
+            }
+
+            #container .submit {
+                position: relative;
+                left: 0;
+            }
+
+            #container .eye {
+                position: relative;
+                left: 68vw;
+            }
+        }
+
+        @media only screen and (max-width: 900px) {
+            #container #form div {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .input {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .gender {
+                position: relative;
+                right: -60%;
+                top: -20px;
+            }
+
+            body #genderDes {
+                text-align: left;
+                margin: 0;
+            }
+
+            .row select {
+                width: 100%;
+            }
+
+            .row .eye {
+                position: relative;
+                left: 55vw;
+            }
+        }
+
+        @media only screen and (max-width: 1210px) {
+            body {
+                overflow-y: scroll;
+
+            }
+
+            h1 {
+                font-size: 50px
+            }
+
+            #form {
+                display: grid;
+                grid-template-columns: auto;
+                gap: 18px 0;
+            }
+
+            label {
+                font-size: 22px;
+            }
+
+            .submit {
+                position: relative;
+                left: 0;
+                top: 20px;
+                display: flex;
+                justify-content: center;
+            }
+
+            input[type=text],
+            input[type=password] {
+                padding: 15px 10px;
+                font-size: 18px;
+                width: 100%;
+            }
+
+            select {
+                width: 100%;
+            }
+
+            #genderDes {
+                text-align: center;
+                margin-left: 50px;
+            }
+
+            .eye {
+                position: relative;
+                left: 34vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <?php include "myForm.php";?>
+    <div id="container">
+        <h1>Form Validation</h1>
+          
+        <form method="post" id="form" action="http://localhost/demo/myForm.php" onsubmit="return formValidation()">
+            <div class="row">
+                <div class="label"><label for="fname">First Name</label></div>
+                <div class="input"><input type="text" id="fname" name="fname" autocomplete="off"
+                        placeholder="Enter your first name">
+                    <span id="fnameDes">&nbsp</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label"><label for="lname">Last Name</label></div>
+                <div class="input"><input type="text" id="lname" name="lname" autocomplete="off"
+                        placeholder="Enter your last name">
+                    <span id="lnameDes">&nbsp</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label"><label for="email">Email</label></div>
+                <div class="input"><input type="text" id="email" name="email" autocomplete="off"
+                        placeholder="Enter your email Id">
+                    <span id="emailDes">&nbsp</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label"><label for="number">Phone Number</label></div>
+                <div class="input"><input type="text" id="num" name="number" autocomplete="off"
+                        placeholder="Enter your phone number">
+                    <span id="numDes">&nbsp</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label"><label for="user">User ID</label></div>
+                <div class="input"><input type="text" id="user" name="user" autocomplete="off"
+                        placeholder="Enter your user Id">
+                    <span id="userDes">&nbsp</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label"><label id="gender">Gender</label></div>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male" class="gender">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female" class="gender">Female</label><span id="genderDes">&nbsp</span>
+            </div>
+            <div class="row select">
+                <div class="label"><label for="country">Country</label></div>
+                <div class="input">
+                    <select name="country" id="country">
+                        <option value="">None</option>
+                        <option value="Australia">Australia</option>
+                        <option value="India">India</option>
+                        <option value="Japan">Japan</option>
+                        <option value="USA">USA</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span id="countryDes">&nbsp</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label"><label for="pass">Password</label></div>
+                <div class="input"><input type="password" id="pass" name="pass" autocomplete="off"
+                        placeholder="Enter your password">
+                    <p class="eye" id="eye1" onclick="pass()"><i class='fa-regular fa-eye-slash'></i></p>
+                    <span id="passDes">&nbsp</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label"><label>Confirm Password</label></div>
+                <div class="input"><input type="password" id="conpass" name="conpass" autocomplete="off"
+                        placeholder="Enter your password">
+                    <p class="eye" id="eye2" onclick="conpass()"><i class='fa-regular fa-eye-slash'></i></p>
+                    <span id="conpassDes">&nbsp</span>
+                </div>
+            </div>
+            <div class="submit">
+                <div><input type="submit" id="submit" value="SUBMIT"></div>
+            </div>
+        </form>
+    </div>
+    validation
+    <script>
+        function pass() {
+            var peek = document.getElementById("eye1");
+            var text = document.getElementById("pass");
+            if (text.type == "password") {
+                text.type = "text";
+                peek.innerHTML = "<i class='fa-regular fa-eye'></i>"
+            }
+            else {
+                text.type = "password";
+                peek.innerHTML = "<i class='fa-regular fa-eye-slash'></i>";
+            }
+        }
+        function conpass() {
+            var peek = document.getElementById("eye2");
+            var text = document.getElementById("conpass");
+            if (text.type == "password") {
+                text.type = "text";
+                peek.innerHTML = "<i class='fa-regular fa-eye'></i>"
+            }
+            else {
+                text.type = "password";
+                peek.innerHTML = "<i class='fa-regular fa-eye-slash'></i>";
+            }
+        }
+        function formValidation() {
+
+            var fname = document.getElementById("fname").value;
+            var lname = document.getElementById("lname").value;
+            var email = document.getElementById("email").value;
+            var num = document.getElementById("num").value;
+            var user = document.getElementById("user").value;
+            var pass = document.getElementById("pass").value;
+            var country = document.getElementById("country").value;
+            var male = document.getElementById("male").checked;
+            var female = document.getElementById("male").checked;
+            var conpass = document.getElementById("conpass").value;
+            var btn = document.getElementById("submit");
+
+            var fnameDes = document.getElementById("fnameDes");
+            var lnameDes = document.getElementById("lnameDes");
+            var emailDes = document.getElementById("emailDes");
+            var numDes = document.getElementById("numDes");
+            var userDes = document.getElementById("userDes");
+            var passDes = document.getElementById("passDes");
+            var genderDes = document.getElementById("genderDes");
+            var countryDes = document.getElementById("countryDes");
+            var conpassDes = document.getElementById("conpassDes");
+
+            const name = /^[A-Za-z]+$/;
+            const number = /^[0-9]+$/;
+            const valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            const pswd = "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})";
+            // for all
+            if (fname == "") {
+                fnameDes.innerHTML = "**Can not be empty**";
+            }
+            if (lname == "") {
+                lnameDes.innerHTML = "**Can not be empty**";
+            }
+            if (email == "") {
+                emailDes.innerHTML = "**Can not be empty**";
+            }
+            if (num == "") {
+                numDes.innerHTML = "**Can not be empty**";
+            }
+            if (user == "") {
+                userDes.innerHTML = "**Can not be empty**";
+            }
+            if (pass == "") {
+                passDes.innerHTML = "**Can not be empty**";
+            }
+            if (male == false && female == false) {
+                genderDes.innerHTML = "**Can not be empty**";
+            }
+            if (country == "") {
+                countryDes.innerHTML = "**Can not be empty**";
+            }
+            if (conpass == "") {
+                conpassDes.innerHTML = "**Can not be empty**";
+            }
+
+            //first Name
+            if (fname == "") {
+                fnameDes.innerHTML = "**Can not be empty**";
+                document.getElementById("fname").focus();
+                return false;
+            } if (fname.includes(" ")) {
+                fnameDes.innerHTML = "**spaces are not allowed**";
+                document.getElementById("fname").focus();
+                return false;
+            } if (!(name.test(fname))) {
+                fnameDes.innerHTML = "only alphabets are allowed";
+                document.getElementById("fname").focus();
+                return false;
+            } if (fname.length < 3) {
+                fnameDes.innerHTML = "**use more than 3 characters**";
+                document.getElementById("fname").focus();
+                return false;
+            } else {
+                fnameDes.innerHTML = "&nbsp";
+            }
+            // last name
+            if (lname == "") {
+                lnameDes.innerHTML = "**Can not be empty**";
+                document.getElementById("lname").focus();
+                return false;
+            } if (lname.includes(" ")) {
+                lnameDes.innerHTML = "**spaces are not allowed**"
+                document.getElementById("lname").focus();
+                return false;
+            } if (!(name.test(lname))) {
+                lnameDes.innerHTML = "**only alphabets are allowed**";
+                document.getElementById("lname").focus();
+                return false;
+            } if (lname.length < 3) {
+                lnameDes.innerHTML = "**use more than 3 characters**";
+                document.getElementById("lname").focus();
+                return false;
+            } else {
+                lnameDes.innerHTML = "&nbsp";
+            }
+            //email
+            if (email == "") {
+                emailDes.innerHTML = "**can not be empty!**";
+                document.getElementById('email').focus();
+                return false;
+            } if (email.includes(" ")) {
+                emailDes.innerHTML = "**spaces are not allowed!**";
+                document.getElementById('email').focus();
+                return false;
+            } if (valid.test(email)) {
+                emailDes.innerHTML = "&nbsp";
+
+            } else {
+                emailDes.innerHTML = "**invalid email!**";
+                document.getElementById('email').focus();
+                return false;
+            }
+            // number
+            if (num == "") {
+                numDes.innerHTML = "**Can not be empty**";
+                document.getElementById("num").focus();
+                return false;
+            } if (num.includes(" ")) {
+                numDes.innerHTML = "**spaces are not allowed**"
+                document.getElementById("num").focus();
+                return false;
+            } if (!(number.test(num))) {
+                numDes.innerHTML = "**only numbers are allowed**";
+                document.getElementById("num").focus();
+                return false;
+            } if (num.length < 10) {
+                numDes.innerHTML = "**" + (10 - num.length) + " more digits**";
+                document.getElementById("num").focus();
+                return false;
+            } if (num.length > 10) {
+                numDes.innerHTML = "**only 10 digits are allowed**";
+                document.getElementById("num").focus();
+                return false;
+            } else {
+                numDes.innerHTML = "&nbsp";
+            }
+            //user
+            if (user == "") {
+                userDes.innerHTML = "**Can not be empty**";
+                document.getElementById("user").focus();
+                return false;
+            } if (user.includes(" ")) {
+                userDes.innerHTML = "**spaces are not allowed**";
+                document.getElementById("user").focus();
+                return false;
+            } else {
+                userDes.innerHTML = "&nbsp";
+            }
+            //gender
+            if (male === true || female === true) {
+                genderDes.innerHTML = "";
+            }
+            else {
+                document.getElementById("male").focus();
+                genderDes.innerHTML = "**Can not be empty**";
+                return false;
+            }
+            //country
+            if (country == "") {
+                countryDes.innerHTML = "**Can not be empty**";
+                document.getElementById("country").focus();
+                return false;
+            }
+            else {
+                countryDes.innerHTML = "&nbsp";
+            }
+            //password
+            if (pass == "") {
+                passDes.innerHTML = "**Can not be empty**";
+                document.getElementById("pass").focus();
+                return false;
+            } if (pass.includes(" ")) {
+                passDes.innerHTML = "**spaces are not allowed**";
+                document.getElementById("pass").focus();
+                return false;
+            } if (pass.length < 6) {
+                passDes.innerHTML = "**add minimum 6 characters**";
+                document.getElementById("pass").focus();
+                return false;
+            } else {
+                passDes.innerHTML = "&nbsp";
+            }
+            //Confirm password
+            if (conpass == "") {
+                conpassDes.innerHTML = "**Can not be empty**";
+                document.getElementById("conpass").focus();
+                return false;
+            } if (conpass !== pass) {
+                conpassDes.innerHTML = "**password is not same**";
+                document.getElementById("conpass").focus();
+                return false;
+            } else {
+                conpassDes.innerHTML = "&nbsp";
+            }
+        }
+    </script>
+</body>
+
+</html>
